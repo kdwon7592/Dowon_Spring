@@ -1,12 +1,14 @@
 package springbook.user.dao;
 
+import springbook.user.dao.UserDao.ConnectionMaker;
 import springbook.user.domain.User;
 
-public class MainTest {
+public class UserDaoTest {
 	public static void main(String[] args) throws Exception {
 		User user = new User();
+		ConnectionMaker connectionMaker = new DConnectionMaker();
 		
-		UserDao dao = new NUserDao();
+		UserDao dao = new UserDao(connectionMaker);
 		
 		user.setId("dowon");
 		user.setName("dowon");

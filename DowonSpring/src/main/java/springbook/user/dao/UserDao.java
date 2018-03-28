@@ -6,11 +6,13 @@ import java.sql.ResultSet;
 
 import springbook.user.domain.User;
 
-public abstract class UserDao {
-	private SimpleConnectionMaker simpleConnectionMaker;
-	
-	public UserDao() {
-		simpleConnectionMaker = new SimpleConnectionMaker();
+public class UserDao { 
+	private ConnectionMaker connectionMaker;
+	/*
+	 * 고객에게 자유로운 DB커넥션 기능을 제공하고픈 클래스
+	 */
+	public UserDao(ConnectionMaker connectionMaker) {
+		this.connectionMaker = connectionMaker;
 	}
 	
 	public void add(User user) throws Exception {
@@ -19,7 +21,7 @@ public abstract class UserDao {
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection con = DriverManager.getConnection("jdbc:mysql://localhost/test","root", "rlaehdnjs123");
 		*/
-		Connection con = simpleConnectionMaker.getConnection();
+		Connection con = connectionMaker.makeConnection();
 		
 		PreparedStatement ps = con.prepareStatement("insert into users(userid ,name, password) values (? ,? ,?)");
 		ps.setString(1, user.getId());
@@ -37,8 +39,8 @@ public abstract class UserDao {
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection con = DriverManager.getConnection("jdbc:mysql://localhost/test","root", "rlaehdnjs123");
 		*/
-		Connection con = simpleConnectionMaker.getConnection();
-		
+		Connection con = connectionMaker.makeConnection();
+				
 		PreparedStatement ps = con.prepareStatement("select * from users where userid = ?");
 		ps.setString(1, id);
 		
@@ -56,5 +58,10 @@ public abstract class UserDao {
 		return user;
 		
 	}
+	
+	public interface ConnectionMaker {
+		public Connection makeConnection() throws Exception;
+	}
+
 	
 }
