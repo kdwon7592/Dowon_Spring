@@ -13,9 +13,9 @@ public class NConnectionMaker implements ConnectionMaker{
 	public Connection makeConnection() throws Exception {
 		// TODO Auto-generated method stub
 		
-		TbConnection con = (TbConnection) DriverManager.getConnection("jdbc:tibero:thin:@192.168.3.81:8629:tibero","b162", "b162");
+//		TbConnection con = (TbConnection) DriverManager.getConnection("jdbc:tibero:thin:@192.168.3.81:8629:tibero","b162", "b162");
 		
-		return con;
+		return null;
 	}
 	
 	
