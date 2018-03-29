@@ -6,7 +6,8 @@ import springbook.user.domain.User;
 public class UserDaoTest {
 	public static void main(String[] args) throws Exception {
 		User user = new User();
-		ConnectionMaker connectionMaker = new DConnectionMaker();
+//		ConnectionMaker connectionMaker = new DConnectionMaker();
+		ConnectionMaker connectionMaker = new NConnectionMaker();
 		
 		UserDao dao = new UserDao(connectionMaker);
 		
